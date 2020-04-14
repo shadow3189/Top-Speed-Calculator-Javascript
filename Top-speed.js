@@ -2,9 +2,15 @@ class Vehicle
 {
   constructor(t, p, r)
   {
-    this.type = t;
-    this.passengers = p;
-    this.role = r;
+    let type = t;
+    let passengers = p;
+    let role = r;
+    this.vehiclespecs = function()
+    {
+      console.log("Vehicle Type: " + type);
+      console.log("Max Passengers: " + passengers);
+      console.log("Vehicle Role: " + role);      
+    }
   }
 }
 
@@ -13,30 +19,29 @@ class Car extends Vehicle
   constructor(t, p, r, b, m, e, tr, d, w) 
   {
     super(t, p, r);
-    this.brand = b;
-    this.model = m;
-    this.engine = e;
-    this.trans = tr;
-    this.diff = d;
-    this.wheel = w;
+    let brand = b;
+    let model = m;
+    let engine = e;
+    let trans = tr;
+    let diff = d;
+    let wheel = w;
+    this.carspecs = function()
+    {
+      console.log("Vehicle Manufacturer: " + brand);
+      console.log("Vehicle Model: " + model);
+      this.vehiclespecs();
+      engine.enginespecs();
+      trans.transspecs();
+      diff.diffspecs();
+      wheel.wheelspecs();
+    }
+    this.topspeed = function()
+    {
+      let gearedspeed = wheel.mphcalc(diff.diffrpm(trans.transrpm(engine.maxenginerpm())));
+      console.log("At the max engine RPM of " + engine.maxenginerpm() + ", in it's tallest gear, this vehicles is geared to travel at " + gearedspeed.toFixed(2) + " MPH.");
+    }
   }
-  specs()
-  {
-    console.log("Vehicle Manufacturer: " + this.brand);
-    console.log("Vehicle Model: " + this.model);
-    console.log("Vehicle Type: " + this.type);
-    console.log("Max Passengers: " + this.passengers);
-    console.log("Vehicle Role: " + this.role);
-    this.engine.enginespecs();
-    this.trans.transspecs();
-    this.diff.diffspecs();
-    this.wheel.wheelspecs();
-  }
-  topspeed()
-  {
-    this.gearedspeed = this.wheel.mphcalc(this.diff.diffrpm(this.trans.transrpm(this.engine.maxenginerpm())));
-    console.log("At the max engine RPM of " + this.engine.maxrpm + ", in it's tallest gear, this vehicles is geared to travel at " + this.gearedspeed.toFixed(2) + " MPH.");
-  }
+
 }
 
 class Jet extends Vehicle
@@ -158,6 +163,5 @@ T6060 = new Transmission(6, 0.5);
 Star5 = new Wheel(275, 35, 18);
 Z06 = new Car("land", 2, "transportation", "Chevrolet", "Corvette", LS7, T6060, mydiff, Star5);
 
-console.log(Z06.specs());
-console.log(Z06.topspeed());
-
+Z06.carspecs();
+Z06.topspeed();
