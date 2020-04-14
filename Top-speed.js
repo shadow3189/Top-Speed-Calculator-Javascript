@@ -24,11 +24,11 @@ class Car extends Vehicle
     let engine = e;
     let trans = tr;
     let diff = d;
-    let wheel = w;
-    this.carspecs = function()
+    let wheel = w;    
+    this.specs = function()
     {
       console.log("Vehicle Manufacturer: " + brand);
-      console.log("Vehicle Model: " + model);
+      console.log("Vehicle Model: " + model);  
       this.vehiclespecs();
       engine.enginespecs();
       trans.transspecs();
@@ -41,7 +41,6 @@ class Car extends Vehicle
       console.log("At the max engine RPM of " + engine.maxenginerpm() + ", in it's tallest gear, this vehicles is geared to travel at " + gearedspeed.toFixed(2) + " MPH.");
     }
   }
-
 }
 
 class Jet extends Vehicle
@@ -68,7 +67,7 @@ class Engine
     this.maxpower = p;
     this.vi = this.maxpower/this.displacement;
     this.pwr = this.maxpower/this.weight;
-    this.consumption = this.maxrpm/2 * this.displacement * 1/15.7;
+    this.consumption = this.maxrpm/2 * this.displacement * 1.25 * 1/15.7;
   }
   enginespecs()
   {
@@ -78,9 +77,9 @@ class Engine
     console.log("Engine Max RPM: " + this.maxrpm);
     console.log("Engine Weight (lbs): " + this.weight);
     console.log("Engine Max Power (HP): " + this.maxpower);
-    console.log("Engine Volumetric Efficiency (HP/L): " + this.vi);
-    console.log("Engine Power/Weight Ratio (HP/LB): " + this.pwr);
-    console.log("Engine Max Idealized Fuel Consumption (L/Min): " + this.consumption);
+    console.log("Engine Volumetric Efficiency (HP/L): " + this.vi.toFixed(2));
+    console.log("Engine Power/Weight Ratio (HP/LB): " + this.pwr.toFixed(2));
+    console.log("Engine Max Idealized Fuel Consumption (g/Min): " + this.consumption.toFixed(2));
   }
   maxenginerpm()
   {
@@ -141,8 +140,8 @@ class Wheel
   {
     console.log("Rim Diameter (in): " + this.rdiameter);
     console.log("Tire Width (mm): " + this.width);
-    console.log("Tire Thickness (mm): " + this.thickness);
-    console.log("Overall Wheel Diameter (in): " + this.odiameter);
+    console.log("Tire Thickness (mm): " + this.thickness.toFixed(2));
+    console.log("Overall Wheel Diameter (in): " + this.odiameter.toFixed(2));
   }
   mphcalc(rpm)
   {
@@ -163,5 +162,5 @@ T6060 = new Transmission(6, 0.5);
 Star5 = new Wheel(275, 35, 18);
 Z06 = new Car("land", 2, "transportation", "Chevrolet", "Corvette", LS7, T6060, mydiff, Star5);
 
-Z06.carspecs();
+Z06.specs();
 Z06.topspeed();
